@@ -8,12 +8,20 @@
 
 
 #This will call all other classes created, related to App1.
-
-
-
+import sys
+from PayloadRetriever import PayloadRetriever
+from PayloadSaver import PayloadSaver
 
 
 def main():
+
+    print("Retrieving JSON payload from source.")
+    payload = PayloadRetriever().readAndDecodeJSON()
+    print("Sending payload to App2.")
+
+    print("Saving payload to text file.")
+    PayloadSaver().savePayload(payload)
+
     print("Not Finished")
 
 if __name__ == '__main__':
