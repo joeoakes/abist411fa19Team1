@@ -20,7 +20,7 @@ class PayloadRetriever:
     def readAndDecodeJSON(self):
         try:
             with urllib.request.urlopen(self.url + self.param) as payload:
-                jsonPayload = payload.read().decode('utf-8')
+                jsonPayload = json.loads(payload.read().decode('utf-8'))
                 
                 # Log to App5 Success
 
