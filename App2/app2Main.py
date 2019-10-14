@@ -24,10 +24,17 @@ try:
         print(clientSocket.recv(1024))
 
     # Log pass/fail workflow actions into the MongoDB database with timestamp
+        client = MongoClient('localhost', 27017)
+        db = client.Team1
+        collection = db.logs
         post_id = collection.insert_one({"Type": "Test","Time": datetime.datetime.utcnow(), "Action": "Connection Accepted"})
 
     # Unit tests for methods
 
 except Exception as e:
     print(e)
+    client = MongoClient('localhost', 27017)
+    db = client.Team1
+    collection = db.logs
+
     post_id = collection.insert_one({"Type": "Test","Time": datetime.datetime.utcnow(), "Action": "Error in Connecting"})
