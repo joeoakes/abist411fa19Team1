@@ -1,3 +1,4 @@
+
 #Project: Project Diamond
 #Purpose Details: Retrieve a JSON payload from the internet and send it to App2 using TLS. It will also retrieve an encrypted payload from App4 and save the JSON payload to a text file.
 #Course: IST 411
@@ -12,12 +13,13 @@ import sys
 from PayloadRetriever import PayloadRetriever
 from PayloadSaver import PayloadSaver
 from SendPayload import SendPayload
+from pymongo import MongoClient
 
 
 def main():
-   # client = MongoClient('localhost', 27017)
-   # db = client.Team1
-   # collection = db.logs
+    client = MongoClient('localhost', 27017)
+    db = client.Team1
+    collection = db.logs
     print("Retrieving JSON payload from source.")
     payload = PayloadRetriever().readAndDecodeJSON()
 

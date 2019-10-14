@@ -5,7 +5,8 @@
 # Date Developed: 10/11/19
 # Last Date Changed:
 # Rev:
-import socket, ssl, json
+import socket, ssl, json, datetime
+from pymongo inport MongoClient
 
 # To send payload
 class SendPayload:
@@ -24,12 +25,17 @@ class SendPayload:
          ssl_sock.close()
          print(ssl_sock.cipher())
 
+         client = MongoClient('localhost', 27017)
+         db = client.Team1
+         collection = db.logs
+
          # Logging
+         post_id = collection.insert_one({"Type": "Test","Time": datetime.datetime.utcnow(), "Action": "Sent Payload"})
          return True
 
       except Exception as e:
          print(e)
 
          #Logging
-
+         post_id = collection.insert_one({"Type": "Test","Time": datetime.datetime.utcnow(), "Action": "Failed to Send Payload"})
          return False
