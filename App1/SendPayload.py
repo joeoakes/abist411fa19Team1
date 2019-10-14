@@ -17,7 +17,7 @@ class SendPayload:
          s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
          ssl_sock = ssl.wrap_socket(s,
             ca_certs="team1Server.crt",
-            ca_reqs=ssl.CERT_REQUIRED)
+            cert_reqs=ssl.CERT_REQUIRED)
          ssl_sock.connect(('localhost',443))
          ssl_sock.sendall(payload)
          print("JSON payload sent to _______ using TLS")

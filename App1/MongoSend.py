@@ -13,15 +13,15 @@ import sys, config
 
 class MongoSend:
 
-	def __init__(self):
-		self.date = ""
-	        self.text = ""
+    def __init__(self):
+        self.date = ""
+        self.text = ""
 
-	# method to send to database
-	def dbSend(date, text):
-        	client = MongoClient('localhost', 27017)
-        	db = client.Team1
-        	collection = db.logs
-        	post_id = collection.insert_one({"Date": date, "Action": text})
-        	print(text)
+# method to send to database
+    def dbSend(date, text):
+        client = MongoClient('localhost', 27017)
+        db = client.Team1
+        collection = db.logs
+        post_id = collection.insert_one({"Date": date, "Action": text})
+        print(text)
 

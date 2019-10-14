@@ -8,29 +8,27 @@
 
 
 #This will call all other classes created, related to App1.
-import sys, datetime
+import sys
 from PayloadRetriever import PayloadRetriever
 from PayloadSaver import PayloadSaver
-from MongoSend import MongoSend
-from pymongo import MongoClient
-from SendPayload import sendPayload
+from SendPayload import SendPayload
 
 
 def main():
-	client = MongoClient('localhost', 27017)
-	db = client.Team1
-	collection = db.logs
-	print("Retrieving JSON payload from source.")
-	payload = PayloadRetriever().readAndDecodeJSON()
+   # client = MongoClient('localhost', 27017)
+   # db = client.Team1
+   # collection = db.logs
+    print("Retrieving JSON payload from source.")
+    payload = PayloadRetriever().readAndDecodeJSON()
 
-	print("Sending payload to App2.")
-        SendPayload().sendPayload(payload)
+    print("Sending payload to App2.")
+    SendPayload().sendPayload(payload)
 
-	print("Saving payload to text file.")
-   	PayloadSaver().savePayload(payload)
+    print("Saving payload to text file.")
+    PayloadSaver().savePayload(payload)
 
 
-	print("Not Finished")
+    print("Not Finished")
 
 if __name__ == '__main__':
     main()
