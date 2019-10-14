@@ -13,6 +13,7 @@ from PayloadRetriever import PayloadRetriever
 from PayloadSaver import PayloadSaver
 from MongoSend import MongoSend
 from pymongo import MongoClient
+from SendPayload import sendPayload
 
 
 def main():
@@ -23,6 +24,7 @@ def main():
 	payload = PayloadRetriever().readAndDecodeJSON()
 
 	print("Sending payload to App2.")
+        SendPayload().sendPayload(payload)
 
 	print("Saving payload to text file.")
    	PayloadSaver().savePayload(payload)
