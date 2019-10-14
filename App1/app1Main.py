@@ -11,6 +11,7 @@
 import sys, datetime
 from PayloadRetriever import PayloadRetriever
 from PayloadSaver import PayloadSaver
+from MongoSend import MongoSend
 from pymongo import MongoClient
 
 
@@ -20,13 +21,12 @@ def main():
 	collection = db.logs
 	print("Retrieving JSON payload from source.")
 	payload = PayloadRetriever().readAndDecodeJSON()
-	post_id = logs.insert_one({"Date": datetime.datetime.utcnow(), "Action": "Retrieving JSON payload from source."})
+
 	print("Sending payload to App2.")
 
-	post_id = logs.insert_one({"Date": datetime.datetime.utcnow(), "Action": "Sending payload to App2"})
 	print("Saving payload to text file.")
    	PayloadSaver().savePayload(payload)
-	post_id = logs.insert_one({"Date": datetime.datetime.utcnow(), "Action": "Saving payload to text file."})
+
 
 	print("Not Finished")
 
