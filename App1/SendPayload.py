@@ -6,7 +6,7 @@
 # Last Date Changed:
 # Rev:
 import socket, ssl, json, datetime
-from pymongo inport MongoClient
+from pymongo import MongoClient
 
 # To send payload
 class SendPayload:
@@ -34,6 +34,10 @@ class SendPayload:
          return True
 
       except Exception as e:
+         client = MongoClient('localhost', 27017)
+         db = client.Team1
+         collection = db.logs
+
          print(e)
 
          #Logging
