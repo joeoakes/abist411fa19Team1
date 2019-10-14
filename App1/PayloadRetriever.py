@@ -22,12 +22,12 @@ class PayloadRetriever:
             with urllib.request.urlopen(self.url + self.param) as payload:
                 jsonPayload = json.loads(payload.read().decode('utf-8'))
                 # Log to App5 Success
-       #         MongoSend.MongoSend.dbSend(datetime.datetime.utcnow(), "Got Payload")
+                MongoSend.MongoSend.dbSend(datetime.datetime.utcnow(), "Got Payload")
 
                 return jsonPayload
 
 
         except Exception as e:
             print("error: %s" % e)
-        #    MongoSend.MongoSend.dbSend(datetime.datetime.utcnow(), "Get Payload Fail")
+            MongoSend.MongoSend.dbSend(datetime.datetime.utcnow(), "Get Payload Fail")
             # Log to App5 Failure
