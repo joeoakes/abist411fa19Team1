@@ -1,13 +1,10 @@
 import unittest
-from pymongo import MongoClient
+#from pymongo import MongoClient
+from mongo import MongoDB
 
 class MongoTest(unittest.TestCase):
 
     #testing readAndDecodeJSON method
     def testInsertOne(self):
-        client = MongoClient('localhost', 27017)
-        db = client.Test_DataBase
-        collection = db.test_collection
-        person={"Name": "Bob", "Job": "Builder"}
-        post_id = collection.insert_one(person)
-        self.assertEqual(person, collection.find({"Name": "Bob"}))
+        MongoDB.mongoInstance("Unit test", "testing unit")
+        self.assertEqual(("Unit test", "testing unit"), collection.find({"Type": "Unit test"}))

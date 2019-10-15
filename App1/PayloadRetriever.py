@@ -9,7 +9,7 @@
 
 import sys, urllib.request, json, config, datetime
 from MongoSend import MongoSend
-from pymongo import MongoClient
+from mongo import MongoDB
 
 class PayloadRetriever:
     # Default constructor declaring URL and PARAM going to be used
@@ -23,16 +23,12 @@ class PayloadRetriever:
             with urllib.request.urlopen(self.url + self.param) as payload:
                 jsonPayload = json.loads(payload.read().decode('utf-8'))
                 # Log to App5 Success
-                client = MongoClient('localhost', 27017)
-                db = client.Team1
-                collection = db.logs
 
-                post_id = collection.insert_one({"Type": "Test","Time": datetime.datetime.utcnow(), "Action": "Got Payload"})
-
+                MongoDB.mongoInstance("Test", "Got Payload")
                 return jsonPayload
 
 
         except Exception as e:
             print("error: %s" % e)
-            post_id = collection.insert_one({"Type": "Test", "Time": datetime.datetime.utcnow(), "Action": "Failed to get Payload"})
             # Log to App5 Failure
+            MongoDB.mongoInstance("Test", "Failed to get Payload")

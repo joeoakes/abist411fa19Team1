@@ -6,7 +6,7 @@
 # Last Date Changed:
 # Rev:
 import socket, ssl, json, datetime
-from pymongo import MongoClient
+from mongo import MongoDB
 
 # To send payload
 class SendPayload:
@@ -24,13 +24,8 @@ class SendPayload:
          print("JSON payload sent to _______ using TLS")
          ssl_sock.close()
          print(ssl_sock.cipher())
-
-         client = MongoClient('localhost', 27017)
-         db = client.Team1
-         collection = db.logs
-
          # Logging
-         post_id = collection.insert_one({"Type": "Test","Time": datetime.datetime.utcnow(), "Action": "Sent Payload"})
+         MongoDB.mongoInstance("Test","Sent to app2")
          return True
 
       except Exception as e:
@@ -41,5 +36,5 @@ class SendPayload:
          print(e)
 
          #Logging
-         post_id = collection.insert_one({"Type": "Test","Time": datetime.datetime.utcnow(), "Action": "Failed to Send Payload"})
+         MongoDB.mongoInstance("Test","Failed to send to app2")
          return False
