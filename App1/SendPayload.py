@@ -7,6 +7,7 @@
 # Rev:
 import socket, ssl, json, datetime
 from mongo import MongoDB
+from pymongo import MongoClient
 
 # To send payload
 class SendPayload:
