@@ -7,7 +7,7 @@ class MongoDB:
         try:
             client = MongoClient(self,'localhost', 27017)
             print("Connected to MongoDB")
-            db = client.Team1
+            db = client.Team1Fall
             print("Got the Database test_database")
             collection = db.logs
             print("Got the Collection")
