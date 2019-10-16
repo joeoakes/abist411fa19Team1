@@ -8,8 +8,8 @@
 
 
 import sys, urllib.request, json, config, datetime
-from MongoSend import MongoSend
-from mongo import MongoDB
+#from MongoSend import MongoSend
+#from mongo import MongoDB
 
 class PayloadRetriever:
     # Default constructor declaring URL and PARAM going to be used
@@ -24,11 +24,11 @@ class PayloadRetriever:
                 jsonPayload = json.loads(payload.read().decode('utf-8'))
                 # Log to App5 Success
 
-                MongoDB.mongoInstance("Test", "Got Payload")
+ #               MongoDB.mongoInstance("Test", "Got Payload")
                 return jsonPayload
 
 
         except Exception as e:
             print("error: %s" % e)
             # Log to App5 Failure
-            MongoDB.mongoInstance("Test", "Failed to get Payload")
+  #          MongoDB.mongoInstance("Test", "Failed to get Payload")
