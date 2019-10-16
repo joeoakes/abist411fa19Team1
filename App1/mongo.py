@@ -3,7 +3,7 @@ import sys, datetime
 from pymongo import MongoClient
 
 class MongoDB:
-    def mongoInstance(self, type, text):
+    def mongoInstance(type, text):
         try:
             client = MongoClient('localhost', 27017)
             print("Connected to MongoDB")
