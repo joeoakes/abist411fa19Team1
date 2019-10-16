@@ -5,7 +5,7 @@ from pymongo import MongoClient
 class MongoDB:
     def mongoInstance(type, text):
         try:
-            client = MongoClient('localhost', 27017)
+            client = MongoClient(self,'localhost', 27017)
             print("Connected to MongoDB")
             db = client.Team1
             print("Got the Database test_database")
