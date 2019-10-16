@@ -21,7 +21,7 @@ class SendPayload:
             ca_certs="team1tls.crt",
             cert_reqs=ssl.CERT_REQUIRED)
          ssl_sock.connect(('localhost',8080))
-         ssl_sock.sendall(payload)
+         ssl_sock.sendall(json.dumps(payload).encode())
          print("JSON payload sent to _______ using TLS")
          ssl_sock.close()
          print(ssl_sock.cipher())
