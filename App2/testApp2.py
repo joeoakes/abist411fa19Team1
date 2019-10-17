@@ -7,12 +7,11 @@
 # Rev: 2
 
 import unittest, socket, ssl
-from SendPayload import sendPayload
-
+#from SendPayload import SendPayload
+import app2
 
 class TestApp2(unittest.TestCase):
 
     def testApp2(self):
         payload = "message"
-        SendPayload().sendPayload(payload)
-        self.assertEqual(serverssl_socket.recv(1024).decode(), "reply")
+        self.assertEqual(app2.getConnection(), True)

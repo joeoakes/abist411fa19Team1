@@ -30,7 +30,6 @@ def main():
     PayloadSaver().savePayload(payload)
 
 
-    print("Not Finished")
 
 if __name__ == '__main__':
     main()
