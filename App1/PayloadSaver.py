@@ -8,8 +8,8 @@
 
 
 import sys, json, datetime
-#from mongo import MongoDB
-#from pymongo import MongoClient
+from mongo import MongoDB
+from pymongo import MongoClient
 
 # To save payload
 class PayloadSaver:
@@ -20,14 +20,14 @@ class PayloadSaver:
             with open('jsonPayload.txt', 'w') as outFile:
                 outFile.write(json.dumps(payload))
                 #Logging
-             #   MongoDB.mongoInstance("test","Saved Payload")
+                MongoDB.mongoInstance("test","Saved Payload")
                 return True
 
         except Exception as e:
             print("Error: %s" % e)
 
             #Logging
-            #MongoDB.mongoInstance("test","Failed to Save Payload")
+            MongoDB.mongoInstance("test","Failed to Save Payload")
 
 
             return False

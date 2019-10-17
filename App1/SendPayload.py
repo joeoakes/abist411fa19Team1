@@ -6,8 +6,8 @@
 # Last Date Changed: 10/16/19
 # Rev: 2
 import socket, ssl, json, datetime
-#from mongo import MongoDB
-#from pymongo import MongoClient
+from mongo import MongoDB
+from pymongo import MongoClient
 
 # To send payload
 class SendPayload:
@@ -26,16 +26,12 @@ class SendPayload:
          ssl_sock.close()
          print(ssl_sock.cipher())
          # Logging
- #        MongoDB.mongoInstance("Test","Sent to app2")
+         MongoDB.mongoInstance("Test","Sent to app2")
          return True
 
       except Exception as e:
-    #     client = MongoClient('localhost', 27017)
-     #    db = client.Team1
-     #    collection = db.logs
-
          print(e)
 
          #Logging
-  #       MongoDB.mongoInstance("Test","Failed to send to app2")
+         MongoDB.mongoInstance("Test","Failed to send to app2")
          #return False

@@ -8,6 +8,7 @@
 
 import socket
 import ssl
+from mongo import MongoDB
 
 try:
     # Receive the secure payload using TLS
@@ -23,10 +24,11 @@ try:
         print("Accept connections from outside")
         (clientSocket, address) = ssl_socket.accept()
         print(clientSocket.recv(1024))
-
+        MongoDB.mongoInstance("Test", "Got Connection")
     # Log pass/fail workflow actions into the MongoDB database with timestamp
 
     # Unit tests for methods
 
 except Exception as e:
     print(e)
+    MongoDB.mongoInstance("Test", "Failed to Get Connection")

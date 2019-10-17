@@ -1,4 +1,3 @@
-
 import sys, datetime
 from pymongo import MongoClient
 
