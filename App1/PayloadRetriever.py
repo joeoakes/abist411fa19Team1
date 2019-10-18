@@ -7,7 +7,8 @@
 # Rev:
 
 
-import sys, urllib.request, json, config, datetime
+import sys, urllib.request, json, datetime
+import config 
 from mongo import MongoDB
 
 class PayloadRetriever:
@@ -17,17 +18,18 @@ class PayloadRetriever:
         self.param = config.PARAM
 
     # Gets JSON payload using URL and PARAM
-    def readAndDecodeJSON(self):
+    def readAndDecodeJSON(self, db):
         try:
             with urllib.request.urlopen(self.url + self.param) as payload:
                 jsonPayload = json.loads(payload.read().decode('utf-8'))
                 # Log to App5 Success
 
-                mongo.mongoInstance("Test", "Got Payload")
+                db.mongoInstance("Test", "Got Payload")
                 return jsonPayload
 
 
         except Exception as e:
             print("error: %s" % e)
             # Log to App5 Failure
-            MongoDB.mongoInstance("Test", "Failed to get Payload")
+            db.mongoInstance("Test", "Failed to get Payload")
+            return null

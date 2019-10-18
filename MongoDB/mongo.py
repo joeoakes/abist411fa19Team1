@@ -16,7 +16,7 @@ class MongoDB:
 #            e = sys.exc_info()[0]
             print("error:%s"%e)
 
-    def mongoInstance(self, typer, text):
+    def mongoInstance(typer, text):
         try:
 #            client = MongoClient('localhost', 27017)
 #            print("Connected to MongoDB")

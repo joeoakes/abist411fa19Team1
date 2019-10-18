@@ -22,21 +22,18 @@ try:
     # Listen on port 8080
     ssl_socket.bind(('localhost', 8080))
     ssl_socket.listen(5)
-
+    mongoDB = MongoDB()
     while True:
         print("Accept connections from outside")
         (clientSocket, address) = ssl_socket.accept()
         print(clientSocket.recv(1024))
-<<<<<<< HEAD
-        MongoDB.mongoInstance("Test", "Got Connection")
-=======
+        mongoDB.mongoInstance("Test", "Got Connection")
         
 
->>>>>>> f19ffca418e9c9091489ddd434c1ddb9b12a67bf
     # Log pass/fail workflow actions into the MongoDB database with timestamp
 
     # Unit tests for methods
 
 except Exception as e:
     print(e)
-    MongoDB.mongoInstance("Test", "Failed to Get Connection")
+    mongoDB.mongoInstance("Test", "Failed to Get Connection")

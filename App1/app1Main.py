@@ -13,21 +13,22 @@ import sys
 from PayloadRetriever import PayloadRetriever
 from PayloadSaver import PayloadSaver
 from SendPayload import SendPayload
-from pymongo import MongoClient
+from mongo import MongoDB
 
 
 def main():
-    client = MongoClient('localhost', 27017)
-    db = client.Team1
-    collection = db.logs
+#    client = MongoClient('localhost', 27017)
+#    db = client.Team1
+#    collection = db.logs
+    mongoDB = MongoDB()
     print("Retrieving JSON payload from source.")
-    payload = PayloadRetriever().readAndDecodeJSON()
+    payload = PayloadRetriever().readAndDecodeJSON(mongoDB)
 
     print("Sending payload to App2.")
-    SendPayload().sendPayload(payload)
+    SendPayload().sendPayload(payload,mongoDB)
 
     print("Saving payload to text file.")
-    PayloadSaver().savePayload(payload)
+    PayloadSaver().savePayload(payload,mongoDB)
 
 
 

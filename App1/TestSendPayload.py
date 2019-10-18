@@ -8,9 +8,11 @@
 import unittest, socket, ssl
 from SendPayload import SendPayload
 from PayloadRetriever import PayloadRetriever
+from mongo import MongoDB
 class TestSendPayload(unittest.TestCase):
 
-   def testSendPayload(self):
-        results = SendPayload().sendPayload(PayloadRetriever().readAndDecodeJSON())
-        self.assertTrue(results)
+    def testSendPayload(self):
+       db=MongoDB()
+       results = SendPayload().sendPayload(PayloadRetriever().readAndDecodeJSON(db),db)
+       self.assertTrue(results)
         
