@@ -22,5 +22,6 @@ class CompressPayload:
             # Compress the byte array file contents and create checksum
             payloadComp = zlib.compress(data)
             chcecksum = zlib.crc32(data)
+            return payloadComp
         except Exception as e:
             print(e)
