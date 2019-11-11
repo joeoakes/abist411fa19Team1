@@ -10,7 +10,7 @@
 import pysftp, sys
 import config
 
-class app3SFTP:
+class SFTPReceive:
     # Initialize using config file
     def __init__(self):
         self.cnopts = config.cnopts
