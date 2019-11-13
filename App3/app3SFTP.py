@@ -3,22 +3,24 @@
 # Course: IST 411 Fall 2019
 # Author: Team 1
 # Date Developed: 11/04/19
-# Last Date Changed:
+# Last Date Changed: 11/12/19
 # Rev:
 
 #https://pysftp.readthedocs.io/en/release_0.2.9/
 import pysftp, sys
 import config
 
+"""This class receives payload from a SFTP server"""
 class SFTPReceive:
-    # Initialize using config file
+
+    """Initialize using config file"""
     def __init__(self):
         self.cnopts = config.cnopts
         cnopts.hostkeys = None
         self.cnopts = config.cinfo
 
-    # Start connection and move files
-    def connectSFTP(self, db):
+    """Start connection and move files"""
+    def connectSFTP(self):
         try:
             with pysftp.Connection(**cinfo) as sftp:
                 print("Connection made")

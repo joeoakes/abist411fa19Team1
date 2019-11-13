@@ -9,8 +9,10 @@
 import zlib, json, sys
 #from mongo import MongoDB
 
+"""Take the payload and compress it"""
 class CompressPayload:
 
+    """Compress the payload received by the app"""
     def compress(payload):
         try:
             data = payload.read()
