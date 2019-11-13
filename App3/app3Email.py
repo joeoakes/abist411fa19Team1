@@ -12,7 +12,7 @@ import smtplib
 ''' Import the email modules we'll need '''
 from email.mime.text import MIMEText
 
-
+''' Email payloads to specified email addresses '''
 class EmailPayload:
     ''' Setup the email components Subject, From, To '''
     def __init__(self, payload):
