@@ -11,13 +11,14 @@ import sys, urllib.request, json, datetime
 import config 
 from mongo import MongoDB
 
+''' Retrieve Payload '''
 class PayloadRetriever:
-    # Default constructor declaring URL and PARAM going to be used
+    ''' Default constructor declaring URL and PARAM going to be used '''
     def __init__(self):
         self.url = config.URL
         self.param = config.PARAM
 
-    # Gets JSON payload using URL and PARAM
+    ''' Gets JSON payload using URL and PARAM '''
     def readAndDecodeJSON(self, db):
         try:
             with urllib.request.urlopen(self.url + self.param) as payload:

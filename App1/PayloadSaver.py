@@ -11,10 +11,10 @@ import sys, json, datetime
 #from mongo import MongoDB
 #from pymongo import MongoClient
 
-# To save payload
+''' To save payload '''
 class PayloadSaver:
 
-    #Writes payload to TEXT file
+    ''' Writes payload to TEXT file '''
     def savePayload(self,payload,db):
         try:
             with open('jsonPayload.txt', 'w') as outFile:

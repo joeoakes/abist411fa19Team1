@@ -14,6 +14,7 @@ from PayloadSaver import PayloadSaver
 from SendPayload import SendPayload
 from mongo import MongoDB
 
+''' This will call all other classes created for App1 '''
 def main():
 
     timestamp = 1545730073

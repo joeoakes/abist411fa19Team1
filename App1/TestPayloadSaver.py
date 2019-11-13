@@ -10,9 +10,11 @@ import unittest
 from PayloadSaver import PayloadSaver
 from PayloadRetriever import PayloadRetriever
 from mongo import MongoDB
+
+''' Testing methods within PayloadSaver class '''
 class PayloadSaverTest(unittest.TestCase):
 
-    #testing savePayload method
+    ''' testing savePayload method '''
     def testSavePayload(self):
         db = MongoDB()
         self.assertTrue(PayloadSaver().savePayload(
