@@ -7,18 +7,16 @@
 # Rev:
 
 import zlib, json, sys
-from mongo import MongoDB
+#from mongo import MongoDB
 
 class CompressPayload:
 
-    def compress(self, db)
+    def compress(payload):
         try:
-            print("Reading the file PaylodTeam1 to compress")
-            payload = open('payloadTeam1.py', 'rb')
             data = payload.read()
             payload.close()
 
-            print("Compressing Team 1 Payload")
+            print("Compressing Payload")
             # Compress the byte array file contents and create checksum
             payloadComp = zlib.compress(data)
             chcecksum = zlib.crc32(data)
