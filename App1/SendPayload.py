@@ -9,10 +9,12 @@ import socket, ssl, json, datetime
 from mongo import MongoDB
 #from pymongo import MongoClient
 
+"""Send payload to a different class"""
 # To send payload
 class SendPayload:
 
-   # Connect to server and send payload
+    """Send payload accepting payload and a database"""
+    # Connect to server and send payload
     def sendPayload(self, payload,db):
         try:
             print("App 1 connecting on port 8080 using TLS")
@@ -21,16 +23,16 @@ class SendPayload:
                 ca_certs="team1tls.crt",
                 cert_reqs=ssl.CERT_REQUIRED)
             ssl_sock.connect(('localhost',8080))
-            
+
             ssl_sock.sendall(json.dumps(payload).encode())
             print("JSON payload sent to _______ using TLS")
             ssl_sock.close()
-            
+
             db.mongoInstance("Test","Sent to app2")
             return True
 
         except Exception as e:
-            
+
             db.mongoInstance("Test","Failed to send to app2")
             print(e)
             return False
