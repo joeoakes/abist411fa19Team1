@@ -10,11 +10,14 @@
 import unittest, urllib.request, json
 from app3Email import EmailPayload
 
+''' Test EmailPayload class '''
 class EmailPayloadTest(unittest.TestCase):
+    ''' Setting up payload to use for testing '''
     def setUp(self):
         with urllib.request.urlopen('https://jsonplaceholder.typicode.com/posts/1') as payload:
             self.jsonPayload = json.loads(payload.read().decode('utf-8'))
 
+    ''' Testing sendEmail method '''
     def testEmailisSent(self):
         email = EmailPayload(self.jsonPayload)
         self.assertTrue(email.sendEmail())

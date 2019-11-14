@@ -9,6 +9,7 @@
 
 import Pyro4
 
+''' To create and send a pyro object to App4 '''
 class App3Pyro:
     ''' Create and send pyro object '''
     def pyroPayload(payload):
