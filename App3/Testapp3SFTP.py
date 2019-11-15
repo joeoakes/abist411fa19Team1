@@ -8,6 +8,7 @@
 
 import sys, pysftp, unittest
 import config
+from App1 import *
 
 from app3SFTP import SFTPReceive
 
@@ -26,6 +27,15 @@ class TestSFTP(unittest.TestCase):
 
         cls.process=start_process(target=cls.sart_sftp)
         cls.transport.connect(username='ftpuser', password='test1234', pkey=pkey)
+
+        with pysftp.Connnection(**cinfo) as sftp:
+            try:
+                sftp.get('/home/ftpuser/payloadReceiveTeam1.json')
+
+                payload = open("payloadReceiveTeam1.json", "rb")
+                assertEquals(payload.read(), App1.jsonPayload.txt.read())
+            except Exception as e:
+                print(e)
 
     """Close all running servers after tests"""
     def tearDown(cls):
