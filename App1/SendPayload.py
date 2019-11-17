@@ -16,9 +16,6 @@ class SendPayload:
     """Send payload accepting payload and a database"""
     # Connect to server and send payload
     def sendPayload(self, payload,db):
-         HOST = 'localhost'
-         PORT = 9999
-         s1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         try:
             print("App 1 connecting on port 8080 using TLS")
@@ -31,7 +28,8 @@ class SendPayload:
             ssl_sock.sendall(json.dumps(payload).encode())
             print("JSON payload sent to _______ using TLS")
             ssl_sock.close()
-            s1.connect((HOST, PORT))
+            s1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s1.connect(('localhost', 9999))
             s1.send('App 1 Connected and sent payload'.encode())
             s1.close()
 
@@ -43,7 +41,8 @@ class SendPayload:
 
             db.mongoInstance("Test","Failed to send to app2")
             print(e)
-            s1.connect((HOST, PORT))
+            s1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s1.connect(('localhost', 9999))
             s1.send('App 1 Failed to create a connection'.encode())
             s1.close()
 
