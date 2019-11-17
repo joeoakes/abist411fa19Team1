@@ -1,0 +1,28 @@
+#Project: Project Diamond Purpose Details: Gets logs from other Apps Course: IST 411 Author: Team 1, 
+#Andy Liu Date Developed: 11/14/2019 Last Date Changed:11/16/2019 Rev: 0
+
+
+import logging
+import time
+
+#creates new logger
+logger = logging.getLogger(__name__)
+
+#created handler to get logs
+stream_handler = logging.StreamHandler
+
+#added a new way to output
+logger.addHandler(stream_handler)
+
+#sets logging level and format of what is passed in like time and name of where its from
+logging.basicConfig(level = logging.INFO, format='%(asctime)s:%(filename)s:%(levelname)s:%(message)s')
+
+try:
+
+    logging.info('Test')
+    while True:
+        time.sleep(1)
+
+
+except Exception as e:
+    print(e)

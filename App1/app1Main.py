@@ -8,7 +8,7 @@
 
 
 #This will call all other classes created, related to App1.
-import sys, datetime
+import sys, date
 from PayloadRetriever import PayloadRetriever
 from PayloadSaver import PayloadSaver
 from SendPayload import SendPayload
@@ -18,7 +18,7 @@ from mongo import MongoDB
 def main():
 
     timestamp = 1545730073
-    startDtObject = datetime.fromtimestamp(timestamp)
+    startDtObject = date.fromtimestamp(timestamp)
 #    client = MongoClient('localhost', 27017)
 #    db = client.Team1
 #    collection = db.logs

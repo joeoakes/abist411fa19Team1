@@ -6,18 +6,28 @@
 # Last Date Revised: October 13, 2019
 # Rev: 2
 
-import socket, datetime, ssl
+import socket, datetime, ssl, logging
 from pymongo import MongoClient
+logger = logging.getLogger('app 5')
 
 try:
+
+    #part here as example
+    HOST = 'localhost'
+    PORT = 9999
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((HOST, PORT))
+    s.send('Test from app 2'.encode())
+    s.close()
+
     # Receive the secure payload using TLS
     print("App 2 connecting on port 8080 using SSL (TLS)")
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     ssl_sock = ssl.wrap_socket(s, ca_certs="server.crt", cert_reqs=ssl.CERT_REQUIRED)
     ssl_sock.connect(('localhost', 8080))
     client = MongoClient('localhost', 27017)
     db = client.Team1
     collection = db.logs
+
     while True:
         print("Accept connections from outside")
         (clientSocket, address) = ssl_sock.accept()
