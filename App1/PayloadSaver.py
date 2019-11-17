@@ -7,7 +7,7 @@
 # Rev:
 
 
-import sys, json, datetime
+import sys, json, datetime, socket
 #from mongo import MongoDB
 #from pymongo import MongoClient
 
@@ -16,11 +16,18 @@ class PayloadSaver:
 
     ''' Writes payload to TEXT file '''
     def savePayload(self,payload,db):
+
+        HOST = 'localhost'
+        PORT = 9999
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
             with open('jsonPayload.txt', 'w') as outFile:
                 outFile.write(json.dumps(payload))
                 #Logging
                 db.mongoInstance("test","Saved Payload")
+                s.connect((HOST, PORT))
+                s.send('App 1 Saved Payload'.encode())
+                s.close()
                 return True
 
         except Exception as e:
@@ -28,7 +35,8 @@ class PayloadSaver:
 
             #Logging
             db.mongoInstance("test","Failed to Save Payload")
-
-
+            s.connect((HOST, PORT))
+            s.send('App 1 Failed to save Payload'.encode())
+            s.close
             return False
 

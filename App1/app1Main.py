@@ -8,7 +8,7 @@
 
 
 #This will call all other classes created, related to App1.
-import sys, date
+import sys
 from PayloadRetriever import PayloadRetriever
 from PayloadSaver import PayloadSaver
 from SendPayload import SendPayload
@@ -17,14 +17,14 @@ from mongo import MongoDB
 ''' This will call all other classes created for App1 '''
 def main():
 
-    timestamp = 1545730073
-    startDtObject = date.fromtimestamp(timestamp)
+#    timestamp = 1545730073
+#    startDtObject = date.fromtimestamp(timestamp)
 #    client = MongoClient('localhost', 27017)
 #    db = client.Team1
 #    collection = db.logs
     mongoDB = MongoDB()
 
-    print(startDtObject)
+#    print(startDtObject)
     print("Retrieving JSON payload from source.")
     payload = PayloadRetriever().readAndDecodeJSON(mongoDB)
 
@@ -34,7 +34,7 @@ def main():
     print("Saving payload to text file.")
     PayloadSaver().savePayload(payload,mongoDB)
 
-    endDtObject = datetime.fromtimestamp(timestamp)
+#    endDtObject = datetime.fromtimestamp(timestamp)
 
 
 if __name__ == '__main__':

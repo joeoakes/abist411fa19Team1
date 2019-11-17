@@ -17,7 +17,7 @@ try:
     PORT = 9999
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((HOST, PORT))
-    s.send('Test from app 2'.encode())
+    s.send('App 2 Started'.encode())
     s.close()
 
     # Receive the secure payload using TLS
@@ -38,6 +38,10 @@ try:
         db = client.Team1
         collection = db.logs
         post_id = collection.insert_one({"Type": "Test","Time": datetime.datetime.utcnow(), "Action": "Connection Accepted"})
+        s.connect(('localhost', 9999))
+        s.send('App 2 accepted connection'.encode())
+        s.close()
+
 
     # Unit tests for methods
 
@@ -48,3 +52,8 @@ except Exception as e:
     collection = db.logs
 
     post_id = collection.insert_one({"Type": "Test","Time": datetime.datetime.utcnow(), "Action": "Error in Connecting"})
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(('localhost', 9999))
+    s.send('App 2 failed to accept connection'.encode())
+    s.close()
+
