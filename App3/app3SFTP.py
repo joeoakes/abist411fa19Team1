@@ -10,6 +10,10 @@
 import pysftp, sys
 import config
 
+cnopts = pysftp.CnOpts()
+cnopts.hostkeys = None
+cinfo = {'cnopts':cnopts, 'host': 'oz-ist-linux-oakes', 'username':'ftpuser','password':'test1234','port':100}
+
 """This class receives payload from a SFTP server"""
 class SFTPReceive:
 
@@ -17,7 +21,7 @@ class SFTPReceive:
     def __init__(self):
         self.cnopts = config.cnopts
         cnopts.hostkeys = None
-        self.cnopts = config.cinfo
+        self.cinfo = config.cinfo
 
     """Start connection and move files"""
     def connectSFTP(self):

@@ -1,9 +1,9 @@
 # Project: Project Diamond App3
 # Purpose Details: Secure file transfer with SFTP
 # Course: IST 411 Fall 2019
-# Author: Erik Ellis
+# Author: Team 1, Erik Ellis, David Chen
 # Date Developed: 11/04/19
-# Last Date Changed:
+# Last Date Changed: 11/15/19
 # Rev: 0
 
 import sys
