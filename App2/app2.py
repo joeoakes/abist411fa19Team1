@@ -18,7 +18,7 @@ import sys
 
 class App2:
 
-    def main_():
+    def tls_connection(self):
         try:
             # Receive the secure payload using TLS
             print("App 2 connecting on port 8080 using SSL (TLS)")
@@ -47,7 +47,9 @@ class App2:
     def hash_payload_hmac(self):
         try:
             # Hash the JSON payload and append it to the message (HMAC SHA-256)
-            data = '{"payload":"hashLab"}'
+            payload = open('payload.json', 'rb')
+            data = payload.read()
+            data = bytes(data, 'UTF-8')
             checksum = hashlib.md5(data.encode()).hexdigest()
 
             checksum = hashlib.sha256(data.encode()).hexdigest()
@@ -90,16 +92,19 @@ class App2:
             cnopts.hostkeys = None
             cinfo = {'cnopts': cnopts,
                      'host': 'oz-ist-linux-oakes',
-                     'username': '',    # FIXME add username
-                     'password': '',    # FIXME add password
+                     'username': 'ftpuser',    # FIXME add username
+                     'password': 'test1234',    # FIXME add password
                      'port': 100}
             with pysftp.Connection(**cinfo) as sftp:
                 print("Connection made")
                 try:
-                    print("Getting payload.json file")
-                    sftp.get('/home/TeresaBarker/abist411fa19Team1/App2/payload.json')
-                    sftp.put('/home/TeresaBarker/abist411fa19Team1/App3')
+                    print("Getting payloadTeam1.json file")
+                    sftp.get('/home/ftpuser/payloadTeam1.json')
+                    sftp.put('/home/ftpuser/payloadTeam1.json')
                 except Exception as e:
                     print(e)
         except Exception as e:
-            print("Log exception 1: ", sys.exc_info()[0])
+            print("Log exception: ", sys.exc_info()[0])
+
+
+
