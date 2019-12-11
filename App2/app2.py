@@ -23,6 +23,10 @@ class App2:
             # Receive the secure payload using TLS
             print("App 2 connecting on port 8080 using SSL (TLS)")
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s2.connect('localhost', 9999)
+            s2.send('App 2 got connection from app 1')
+            s2.close()
             ssl_socket = ssl.wrap_socket(s,
                                          server_side=True,
                                          certfile="team1tls.crt",
@@ -36,9 +40,6 @@ class App2:
                 print("Accept connections from outside")
                 (clientSocket, address) = ssl_socket.accept()
                 print(clientSocket.recv(1024))
-
-                mongoDB.mongoInstance("Test", "Got Connection")
-
                 mongoDB.mongoInstance("Test", "Got Connection")
         except Exception as e:
             print(e)
@@ -69,6 +70,11 @@ class App2:
             # call digest() to create signature
             signature = digesterObject.digest()
             print('signature: ', signature)
+
+            s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s2.connect('localhost', 9999)
+            s2.send('App 2 hashed message')
+            s2.close()
 
             '''         *** could possibly be deleted ***
             # perform base64 encoding on the signature
@@ -101,6 +107,12 @@ class App2:
                     print("Getting payloadTeam1.json file")
                     sftp.get('/home/ftpuser/payloadTeam1.json')
                     sftp.put('/home/ftpuser/payloadTeam1.json')
+
+                    s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    s2.connect('localhost', 9999)
+                    s2.send('App 2 sent payload via SFTP')
+                    s2.close()
+
                 except Exception as e:
                     print(e)
         except Exception as e:
