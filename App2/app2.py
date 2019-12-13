@@ -50,12 +50,10 @@ class App2:
                 mongoDB.mongoInstance("Test", "Got Connection")
                 #if(clientSocket.recv(1024) is None):
                 if(dataRecieved is None):
-                    print("none")
                     #condition = False
                     #print(dataRecieved)
                     #hash_payload_hmac(dataRecieved)
                 else:
-                    print("not")
                     condition = False
                     return dataRecieved
         except Exception as e:
@@ -76,7 +74,6 @@ class App2:
             #data = bytes(data, 'UTF-8')
             print(dataRecieved)
             checksum = hashlib.md5(dataRecieved).hexdigest()
-            print("dsadas")
             checksum = hashlib.sha256(dataRecieved).hexdigest()
             print("SHA256: ", checksum)
 
