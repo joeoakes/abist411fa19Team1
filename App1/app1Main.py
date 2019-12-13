@@ -13,15 +13,16 @@ from PayloadRetriever import PayloadRetriever
 from PayloadSaver import PayloadSaver
 from SendPayload import SendPayload
 from mongo import MongoDB
+from datetime import date
 
 ''' This will call all other classes created for App1 '''
 def main():
 
-#    timestamp = 1545730073
-#    startDtObject = date.fromtimestamp(timestamp)
-#    client = MongoClient('localhost', 27017)
-#    db = client.Team1
-#    collection = db.logs
+    timestamp = 1545730073
+    startDtObject = date.fromtimestamp(timestamp)
+    #client = MongoClient('localhost', 27017)
+    #db = client.Team1
+    #collection = db.logs
     mongoDB = MongoDB()
 
 #    print(startDtObject)

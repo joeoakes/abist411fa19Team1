@@ -13,10 +13,14 @@ from mongo import MongoDB
 import pysftp
 import hashlib
 import sys
+import os
 # import base64
 
 
 class App2:
+
+    def __init__(self):
+        self.dataRecieved = None
 
     def tls_connection(self):
         try:
@@ -24,8 +28,8 @@ class App2:
             print("App 2 connecting on port 8080 using SSL (TLS)")
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s2.connect('localhost', 9999)
-            s2.send('App 2 got connection from app 1')
+            s2.connect(('localhost', 9999))
+            s2.send(b'App 2 got connection from app 1')
             s2.close()
             ssl_socket = ssl.wrap_socket(s,
                                          server_side=True,
@@ -36,24 +40,38 @@ class App2:
             ssl_socket.bind(('localhost', 8080))
             ssl_socket.listen(5)
             mongoDB = MongoDB()
-            while True:
+            condition = True
+            while condition:
                 print("Accept connections from outside")
                 (clientSocket, address) = ssl_socket.accept()
-                print(clientSocket.recv(1024))
+                #print(clientSocket.recv(1024))
+                self.dataRecieved = clientSocket.recv(1024)
+                print(self.dataRecieved)
                 mongoDB.mongoInstance("Test", "Got Connection")
+                if(clientSocket.recv(1024) is None):
+                    condition = False
+                    #print(dataRecieved)
+                    #hash_payload_hmac(dataRecieved)
         except Exception as e:
             print(e)
 
-    @staticmethod
+    #@staticmethod
     def hash_payload_hmac(self):
         try:
             # Hash the JSON payload and append it to the message (HMAC SHA-256)
-            payload = open('payload.json', 'rb')
-            data = payload.read()
-            data = bytes(data, 'UTF-8')
-            checksum = hashlib.md5(data.encode()).hexdigest()
+            #cur_path = os.path.dirname(__file__)
+            #print(cur_path)
+            #os.chdir("../App1")
+            #print(os.path.abspath(os.curdir))
+            #new_path = os.path.relpath('~/abist411fa19Team1/jsonPayload.txt', cur_path)
 
-            checksum = hashlib.sha256(data.encode()).hexdigest()
+            #payload = open('jsonPayload.txt', 'rb')
+            #data = payload.read()
+            #data = bytes(data, 'UTF-8')
+            print(self.dataRecieved)
+            checksum = hashlib.md5(self.dataRecieved.encode()).hexdigest()
+
+            checksum = hashlib.sha256(self.dataRecieved.encode()).hexdigest()
             print("SHA256: ", checksum)
 
             # create a message and a key
@@ -88,7 +106,7 @@ class App2:
         except Exception as e:
             print(e)
 
-    @staticmethod
+    #@staticmethod
     def send_payload_sftp(self):
         try:
             # Use SFTP to send the payload to App 3
@@ -105,12 +123,13 @@ class App2:
                 print("Connection made")
                 try:
                     print("Getting payloadTeam1.json file")
-                    sftp.get('/home/ftpuser/payloadTeam1.json')
-                    sftp.put('/home/ftpuser/payloadTeam1.json')
+                    #sftp.get('/home/ftpuser/payloadTeam1.json')
+                    sftp.put('payloadTeam1.json')
 
+                    #sftp.get('/home/ftpuser/payloadTeam1.json')
                     s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                    s2.connect('localhost', 9999)
-                    s2.send('App 2 sent payload via SFTP')
+                    s2.connect(('localhost', 9999))
+                    s2.send(b'App 2 sent payload via SFTP')
                     s2.close()
 
                 except Exception as e:

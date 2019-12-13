@@ -9,12 +9,16 @@
 import hmac, socket, ssl, pysftp, hashlib, sys
 from mongo import MongoDB
 from app2 import App2
-
+#import app2
 def main():
     try:
+        
         App2().tls_connection()
         App2().hash_payload_hmac()
         App2().send_payload_sftp()
+
+        #app2.tls_connection()
+
     except Exception as e:
         print(e)
 

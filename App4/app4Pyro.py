@@ -9,6 +9,7 @@
 
 import Pyro4
 
+''' Receive Pyro object from App3 and provide pyro methods for App3 to use '''
 class App4Pyro:
     ''' Methods interacting with Pyro4 '''
     def __init__(self):

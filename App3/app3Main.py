@@ -19,11 +19,11 @@ def main():
         timestamp = 1545730073
         startDtObject = date.fromtimestamp(timestamp)
 
-        SFTPReceive().connectSFTP()
+        payload = SFTPReceive().connectSFTP()
         # Payload is read from SFTP
-        payload = open('payloadReceiveTeam1.py', 'rb')
-        payload.close()
-
+        #payload = open('payloadTeam1.json', 'rb')
+        #payload.close()
+        
         print("Sending payload through email")
         email = EmailPayload(payload)
         email.sendEmail()
@@ -34,7 +34,7 @@ def main():
         print("Compressing payload")
         payloadComp = CompressPayload.compress(payload)
 
-        endDtObject = datetime.fromtimestamp(timestamp)
+        endDtObject = date.fromtimestamp(timestamp)
     except Exception as e:
         print(e)
 
