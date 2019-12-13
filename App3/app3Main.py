@@ -19,11 +19,11 @@ def main():
         timestamp = 1545730073
         startDtObject = date.fromtimestamp(timestamp)
 
-        payload = SFTPReceive().connectSFTP()
+        SFTPReceive().connectSFTP()
         # Payload is read from SFTP
-        #payload = open('payloadTeam1.json', 'rb')
+        payload = open('payloadTeam1.json', 'r').read()
         #payload.close()
-        
+        #print(payload) 
         print("Sending payload through email")
         email = EmailPayload(payload)
         email.sendEmail()

@@ -13,14 +13,14 @@ from mongo import MongoDB
 import pysftp
 import hashlib
 import sys
-import os
+import os, json
 # import base64
 
 
 class App2:
 
-    def __init__(self):
-        self.dataRecieved = None
+#    def __init__(self):
+#        self.dataRecieved = None
 
     def tls_connection(self):
         try:
@@ -45,18 +45,24 @@ class App2:
                 print("Accept connections from outside")
                 (clientSocket, address) = ssl_socket.accept()
                 #print(clientSocket.recv(1024))
-                self.dataRecieved = clientSocket.recv(1024)
-                print(self.dataRecieved)
+                dataRecieved = clientSocket.recv(1024)
+                print(dataRecieved)
                 mongoDB.mongoInstance("Test", "Got Connection")
-                if(clientSocket.recv(1024) is None):
-                    condition = False
+                #if(clientSocket.recv(1024) is None):
+                if(dataRecieved is None):
+                    print("none")
+                    #condition = False
                     #print(dataRecieved)
                     #hash_payload_hmac(dataRecieved)
+                else:
+                    print("not")
+                    condition = False
+                    return dataRecieved
         except Exception as e:
             print(e)
 
     #@staticmethod
-    def hash_payload_hmac(self):
+    def hash_payload_hmac(self, dataRecieved):
         try:
             # Hash the JSON payload and append it to the message (HMAC SHA-256)
             #cur_path = os.path.dirname(__file__)
@@ -68,10 +74,10 @@ class App2:
             #payload = open('jsonPayload.txt', 'rb')
             #data = payload.read()
             #data = bytes(data, 'UTF-8')
-            print(self.dataRecieved)
-            checksum = hashlib.md5(self.dataRecieved.encode()).hexdigest()
-
-            checksum = hashlib.sha256(self.dataRecieved.encode()).hexdigest()
+            print(dataRecieved)
+            checksum = hashlib.md5(dataRecieved).hexdigest()
+            print("dsadas")
+            checksum = hashlib.sha256(dataRecieved).hexdigest()
             print("SHA256: ", checksum)
 
             # create a message and a key
@@ -90,10 +96,11 @@ class App2:
             print('signature: ', signature)
 
             s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s2.connect('localhost', 9999)
-            s2.send('App 2 hashed message')
+            s2.connect(('localhost', 9999))
+            s2.send(b'App 2 hashed message')
             s2.close()
-
+            with open('payloadTeam1.json', 'wb') as outFile:
+                outFile.write((dataRecieved))
             '''         *** could possibly be deleted ***
             # perform base64 encoding on the signature
             encodedSignature = base64.urlsafe_b64encode(signature)

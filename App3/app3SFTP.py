@@ -66,7 +66,7 @@ class SFTPReceive:
                     s2.send(b'App 3 recieved payload via SFTP')
                     s2.close()
 
-                    return json
+                   
                 except Exception as e:
                     print(e)
         except Exception as e:

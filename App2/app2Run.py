@@ -13,8 +13,8 @@ from app2 import App2
 def main():
     try:
         
-        App2().tls_connection()
-        App2().hash_payload_hmac()
+        #App2().tls_connection()
+        App2().hash_payload_hmac(App2().tls_connection())
         App2().send_payload_sftp()
 
         #app2.tls_connection()

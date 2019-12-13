@@ -44,18 +44,18 @@ class App4Pyro:
             daemon.close()
             print("Daemon closed.\n")
             print("Payload contents: ")
-            print(self.payload[0])
+            print(self.payload)
             print("")
 
             # Logging
 
-            return True
+            return self.payload
         except Exception as e:
             print("Error: %s" % e)
 
             # Logging
 
-            return False
+        
 
 
 

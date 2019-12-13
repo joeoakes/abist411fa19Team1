@@ -14,7 +14,7 @@ from PayloadSaver import PayloadSaver
 from SendPayload import SendPayload
 from mongo import MongoDB
 from datetime import date
-
+from RabbitReciever import RabbitReciever
 ''' This will call all other classes created for App1 '''
 def main():
 
@@ -35,7 +35,9 @@ def main():
     print("Saving payload to text file.")
     PayloadSaver().savePayload(payload,mongoDB)
 
-#    endDtObject = datetime.fromtimestamp(timestamp)
+    RabbitReciever.getMessage()
+
+    endDtObject = date.fromtimestamp(timestamp)
 
 
 if __name__ == '__main__':

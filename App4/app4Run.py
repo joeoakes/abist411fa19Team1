@@ -7,12 +7,14 @@
 #Rev: 0
 
 from app4AES import app4AES
-from app4Pyro import app4Pyro
+from app4Pyro import App4Pyro
 from app4Rabbit import SendPayload
 
 def main():
-    app4Pyro.getURI()
-    SendPayload.sendPayload()
+   
+    payload = App4Pyro().getURI()
+   
+    SendPayload().sendPayload(payload)
 
 if __name__ == '__main__':
     main()

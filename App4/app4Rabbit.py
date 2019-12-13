@@ -12,9 +12,10 @@ from app4AES import app4AES
 
 class SendPayload:
     def sendPayload(self, payload):
-         connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost')
-         channel = connnection.channel()
+         connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+         channel = connection.channel()
          channel.queue_declare(queue='app4Message')
-         payload = self.encryptAES(payload)
-         channel.basic_publish(exchange="", routing_key='node4Message', body=payload)
+         #payload = self.encryptAES(payload)
+         channel.basic_publish(exchange="", routing_key='app4Message', body=payload[0].encode('utf-8'))
+         print("Message Sent")
          connection.close()

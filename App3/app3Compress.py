@@ -15,8 +15,8 @@ class CompressPayload:
     """Compress the payload received by the app"""
     def compress(payload):
         try:
-            data = payload.read()
-            payload.close()
+            data = payload.encode('utf-8')
+            #payload.close()
 
             print("Compressing Payload")
             # Compress the byte array file contents and create checksum

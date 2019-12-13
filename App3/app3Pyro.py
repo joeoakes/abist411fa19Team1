@@ -15,7 +15,7 @@ class App3Pyro:
     def pyroPayload(payload):
         try:
             message = Pyro4.Proxy(input("Please enter the URI: ").strip())
-            message.sendPyro(message)
+            message.sendPyro(payload)
             
             # Logging
 
