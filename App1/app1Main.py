@@ -15,14 +15,16 @@ from SendPayload import SendPayload
 from mongo import MongoDB
 from datetime import date
 from RabbitReciever import RabbitReciever
+import time
 ''' This will call all other classes created for App1 '''
 def main():
 
-    timestamp = 1545730073
-    startDtObject = date.fromtimestamp(timestamp)
+    #timestamp = 1545730073
+    #startDtObject = date.fromtimestamp(timestamp)
     #client = MongoClient('localhost', 27017)
     #db = client.Team1
     #collection = db.logs
+    startTime = time.time()
     mongoDB = MongoDB()
 
 #    print(startDtObject)
@@ -35,10 +37,13 @@ def main():
     print("Saving payload to text file.")
     PayloadSaver().savePayload(payload,mongoDB)
 
-    RabbitReciever.getMessage()
+    RabbitReciever.getMessage(startTime)
 
-    endDtObject = date.fromtimestamp(timestamp)
-
+    endTime = time.time()
+    print(str(endTime-startTime) + " seconds")
+    #endDtObject = date.fromtimestamp(timestamp)
+    
+    #print(((endDtObject-startDtObject).microseconds().total_seconds()))
 
 if __name__ == '__main__':
     main()

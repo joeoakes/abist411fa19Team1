@@ -50,6 +50,7 @@ class App2:
                 mongoDB.mongoInstance("Test", "Got Connection")
                 #if(clientSocket.recv(1024) is None):
                 if(dataRecieved is None):
+                    print("data is none")
                     #condition = False
                     #print(dataRecieved)
                     #hash_payload_hmac(dataRecieved)

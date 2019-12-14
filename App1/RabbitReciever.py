@@ -6,10 +6,10 @@
 # Last Date Changed:
 # Rev:
 
-import pika
-
+import pika, time 
+from datetime import date
 class RabbitReciever:
-    def getMessage():
+    def getMessage(startTime):
         try:
             print("Connecting to localhost")
             connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
@@ -18,6 +18,7 @@ class RabbitReciever:
             #callback function that will receive the message
             def callback(ch,method,properties,body):
                 print(" [x] Received %r" % body)
+                print(str(time.time() - startTime) + " seconds")
             channel.basic_consume('app4Message',callback,auto_ack=True)
             print(' [*] Waiting for messages. To exit press CTRL+C')
             channel.start_consuming()
