@@ -6,23 +6,31 @@
 #Last Date Changed: 12/11/2019
 #Rev: 0
 
-import Pyro4, zlib, sys
+import Pyro4, zlib, sys, socket, datetime
 
 class app4AES:
     def encryptAES(self, payload):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
             pad = b' '
             obj = AES.new('This is a key123', AES.MODE_CBC, 'This is an IV456')
 
-            #plaintext = message.encode('utf-8')
-            #print(plaintext)
             length = 16 - (len(payload)%16)
-            #print(length)
             payload += length*pad
 
             ciphertext = obj.encrypt(payload)
-            self.logger.addLog('Node4','Node4 encrypted with AES')
+
+            # Log success
+            s.connect('localhost', 9999)
+            s.send('App 4 encrypted with AES'.encode())
+            s.close
+
             return ciphertext
         except Exception as e:
+            # Log failure
+            s.connect('localhost', 9999)
+            s.send('App 4 failed to encrypt'.encode())
+            s.close()
+
             print(e)
 

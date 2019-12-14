@@ -24,23 +24,6 @@ class SFTPReceive:
         self.cinfo = config.cinfo
 
     """Start connection and move files"""
-#    def connectSFTP(self):
-#        try:
-#            with pysftp.Connection(**cinfo) as sftp:
-#                print("Connection made")
-#                try:
-#                    print(self.cinfo)
-#                    print(self.cnopts)
-#                    print("getting payloadTeam1.json file")
-#                    sftp.get('/home/ftpuser/payloadTeam1.json')
-#                    print("FUCK")
-#                    sftp.remove('payloadTeam1.json')
-#                    print("THIS")
-#                except:
-#                    print("Log exception 1:", sys.exc_info()[0])
-#        except:
-#            print("Log exception 2:", sys.exc_info()[0])
-
     def connectSFTP(self):
         try:
             # Use SFTP to send the payload to App 3
@@ -65,8 +48,6 @@ class SFTPReceive:
                     s2.connect(('localhost', 9999))
                     s2.send(b'App 3 recieved payload via SFTP')
                     s2.close()
-
-                   
                 except Exception as e:
                     print(e)
         except Exception as e:

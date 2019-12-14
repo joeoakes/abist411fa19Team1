@@ -3,11 +3,11 @@
 # Course: IST 411
 # Author: Team 1
 # Date Developed: 11/10/19
-# Last Date Changed: 
+# Last Date Changed: 12/13/19
 # Rev: 
 
 
-import Pyro4
+import Pyro4, datetime, socket
 
 ''' Receive Pyro object from App3 and provide pyro methods for App3 to use '''
 class App4Pyro:
@@ -17,6 +17,7 @@ class App4Pyro:
 
     ''' To get the URI for later use '''
     def getURI(self):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         @Pyro4.expose
         class SendPayload(object):
             ''' Setting up variables to be used '''
@@ -47,15 +48,19 @@ class App4Pyro:
             print(self.payload)
             print("")
 
-            # Logging
+            # Logging success
+            s.connect('localhost', 9999)
+            s.send('App 4 created Pyro object'.encode())
+            s.close()
 
             return self.payload
         except Exception as e:
             print("Error: %s" % e)
 
             # Logging
-
-        
+            s.connect('localhost', 9999)
+            s.send('App 4 failed to create object'.encode())
+            s.close()
 
 
 
